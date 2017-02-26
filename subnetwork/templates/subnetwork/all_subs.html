@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col s12 m12">
+                <h3 class="center-align">Networks</h3>
+                <div class="row">
+                    <div class="col s12">
+                        <form action="{% url 'subnetworks:all_subs' %}" class="sub-form" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="input-field col s8">
+
+                                    <input type="text" name="sub_form" id="autocomplete-input" class="autocomplete">
+                                    <label for="autocomplete-input">Search for area</label>
+                                </div>
+                                <div class="input-field col s4 center-align">
+                                    <button class="btn waves-effect waves-light" type="submit" name="action">Go!
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        {% for sub in subs %}
+                            <a href="{% url 'subnetworks:sub_name' sub.sub_name %}">
+                                <div class="card-panel hoverable grey lighten-3">
+                <span class="title title-link">
+                     {{ sub.sub_name }}
+                </span>
+                                    <form method="post" action="{% url 'subnetworks:follow' sub.id %}" class="inline">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                                        <button type="submit" name="submit_param" value="submit_value"
+                                                class="link-button">
+                                            Follow
+                                        </button>
+                                    </form>
+                                    <span style="float:right">
+                        <div class="chip">
+                            {{ sub.number_of_followers }} followers
+                        </div>
+                        <div class="chip">
+                            {{ sub.number_of_posts }} posts
+                        </div>
+                        </span>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </li>
+                </ul>
+                <div class="pagination">
+                    <span class="step-links">
+                         {% if subs.has_previous %}
+                             <a href="?page={{ subs.previous_page_number }}">previous</a>
+                         {% endif %}
+
+                        <span class="current">
+                               Page {{ subs.number }} of {{ subs.paginator.num_pages }}.
+                            </span>
+
+                        {% if subs.has_next %}
+                            <a href="?page={{ subs.next_page_number }}">next</a>
+                        {% endif %}
+                    </span>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input.autocomplete').autocomplete({
+                data: {
+                    {% for sub in subnetwork %}
+                        "{{ sub.sub_name }}": null,
+                    {% endfor %}
+                }
+            });
+            $('.modal').modal();
+            {
+            }
+        });
+    </script>
+
+{% endblock %}

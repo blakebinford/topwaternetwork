@@ -1,0 +1,34 @@
+.title-link {
+    font-size: 1.8em;
+}
+
+.card-title {
+    padding: 50px;
+    margin: 25px;
+}
+.nav-wrapper {
+    padding: 3px;
+}
+.inline {
+  display: inline;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: serif;
+  border-radius: 50%;
+}
+.link-button:focus {
+  outline: none;
+}
+.link-button:active {
+  color:red;
+}
+
+.post-body {
+    padding: 15px;
+}

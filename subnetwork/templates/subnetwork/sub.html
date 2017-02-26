@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load markdownify %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col s12 m12">
+                <h3 class="center-align">{{ subnetwork.sub_name }}</h3>
+
+
+                {% for post in reports %}
+                    <div class="card-panel grey lighten-3">
+                <span class="title">
+                     <a href="{{ post.get_absolute_url }}" class="title-link">{{ post.title|title }}</a>
+                    <br/>
+                    submitted at {{ post.pub_date|naturaltime }} by {{ post.author }}
+                </span>
+                        <p>{{ post.body|truncatechars:60|markdownify|safe }}</p>
+                    </div>
+
+                {% endfor %}
+                <div class="pagination">
+                    <span class="step-links">
+                         {% if reports.has_previous %}
+                             <a href="?page={{ reports.previous_page_number }}">previous</a>
+                         {% endif %}
+
+                        <span class="current">
+                               Page {{ reports.number }} of {{ reports.paginator.num_pages }}.
+                            </span>
+
+                        {% if reports.has_next %}
+                            <a href="?page={{ reports.next_page_number }}">next</a>
+                        {% endif %}
+    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">menu</i>
+            </a>
+            <ul>
+                <li><a href="{% url 'posts:create_report' %}" class="btn-floating yellow darken-1"><i
+                        class="material-icons">format_quote</i></a></li>
+                <li><form method="post" action="{% url 'subnetworks:follow' subnetwork.id %}" class="inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                        <button type="submit" name="submit_param" value="submit_value"
+                                class="link-button">
+                            <a class="btn-floating waves-effect waves-light red"><i class="material-icons">add</i></a>
+                        </button>
+                    </form></li>
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}

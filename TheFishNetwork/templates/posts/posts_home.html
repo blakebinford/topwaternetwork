@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load markdownify %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col s12 m12">
+                <h3 class="center-align">Front Page</h3>
+
+
+                {% for post in pag_post %}
+                    <div class="card-panel hoverable grey lighten-3">
+                <span class="title">
+                     <a class="title-link" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    <br />
+                    submitted at {{ post.pub_date|naturaltime }} by {{ post.author }}
+                </span>
+                <p>{{ post.body|truncatechars:60|markdownify|safe }}</p>
+                    </div>
+
+                {% endfor %}
+            <div class="pagination">
+                    <span class="step-links">
+                         {% if pag_post.has_previous %}
+                             <a href="?page={{ pag_post.previous_page_number }}">previous</a>
+                         {% endif %}
+
+                            <span class="current">
+                               Page {{ pag_post.number }} of {{ pag_post.paginator.num_pages }}.
+                            </span>
+
+                         {% if pag_post.has_next %}
+                             <a href="?page={{ pag_post.next_page_number }}">next</a>
+                         {% endif %}
+                    </span>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

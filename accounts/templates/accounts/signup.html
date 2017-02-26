@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    <div class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h4>CREATE A NEW ACCOUNT</h4>
+        </div>
+    </div>
+        <form class="col s8" method="POST" action="{% url 'accounts:signup' %}" autocomplete="off">
+            {% csrf_token %}
+            <div class="row">
+                <div class="input-field col s12">
+                    <input name="username" id="username" type="text" class="validate">
+                    <label for="username">User Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input name="email" id="email" type="email" class="validate" autocomplete="off">
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" name="password" type="password" class="validate" autocomplete="off">
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input name="password2" id="password2" type="password" class="validate" autocomplete="off">
+                    <label for="password2">Retype Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
