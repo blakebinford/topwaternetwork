@@ -2,11 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
+from vote.models import VoteModel
 from subnetwork.models import SubNetwork
 # Create your models here.
 
 
-class FishingReport(models.Model):
+class FishingReport(VoteModel, models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     body = models.TextField()
@@ -23,6 +24,10 @@ class FishingReport(models.Model):
     def __str__(self):
         return '{}'.format(self.title)
 
+    def comment_count(self):
+        self.total_comments = self.comment_set.count()
+        return self.total_comments
+
 
 class Comment(models.Model):
     body = models.TextField()
@@ -31,7 +36,8 @@ class Comment(models.Model):
     parent_report = models.ForeignKey(FishingReport)
 
     class Meta:
-        ordering = ('-pub_date',)
+        ordering = ('-'
+                    'pub_date',)
 
     def __str__(self):
         return 'Comment by {} on {}'.format(self.author, self.parent_report)

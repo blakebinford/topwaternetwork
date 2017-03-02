@@ -4,21 +4,21 @@
 {% block content %}
     <div class="container">
         <div class="row">
-{% if error %}
-            <p>{{ error }}</p>
-        {% endif %}
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
             <div class="col s12 m12">
-                <h3 class="center-align">{{ user_page }}</h3>
+                <h3 class="center-align">Profile for {{ user_page }}</h3>
 
 
                 {% for post in user_posts.all %}
                     <div class="card-panel hoverable grey lighten-3">
                 <span class="title">
                      <a class="title-link" href="{{ post.get_absolute_url }}">{{ post.title|title }}</a>
-                    <br />
+                    <br/>
                     submitted at {{ post.pub_date|naturaltime }} by {{ post.author }}
                 </span>
-                <p>{{ post.body|truncatechars:60|markdownify|safe }}</p>
+                        <p>{{ post.body|truncatechars:60|markdownify|safe }}</p>
                     </div>
 
                 {% endfor %}

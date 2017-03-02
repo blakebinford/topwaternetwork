@@ -6,56 +6,68 @@
         <div class="row">
             <div class="col s12 m12">
                 <div class="card-title grey lighten-3">
-                    <h2><a href="{{ report.get_absolute_url }}">{{ report.title|title }}</a></h2>
+                    <a href="{{ report.get_absolute_url }}" class="title-link">{{ report.title|title }}</a>
                     <hr/>
-
+                    <span class="sub-heading">
                     Posted {{ report.pub_date|naturaltime }} by <a
-                        href="/accounts/{{ report.author.id }}">{{ report.author }}</a>
+                            href="/accounts/{{ report.author.id }}">{{ report.author }}</a></span>
                     <br/>
                     <div class="card-action grey lighten-3 post-body">
                         <p class="flow-text">{{ report.body|markdownify|safe }}</p>
                     </div>
+
+                    <p><a href="#" onclick="document.getElementById('star{{ report.id }}').submit()">
+                        {% if user_liked %}
+                            <i class="liked material-icons ">star</i><span class="liked_number"> {{ report.votes.count }}</span>
+                        {% else %}
+                            <i class="unliked material-icons ">star</i><span class="liked_number"> {{ report.votes.count }}</span>
+                        {% endif %}
+                        </a>
+                        <i class="comment material-icons">message</i><span class="message_number"> {{ report.comment_count }}</span>
+                    </p>
+
+
                 </div>
-                {% with comments.count as total_comments %}
-                    <b>
-                        {{ total_comments }} comment{{ total_comments|pluralize }}
-                    </b>
-                {% endwith %}
-                <div class="row">
-                    <form class="col s12" action="." method="post">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <textarea name="comment" id="textarea1" class="materialize-textarea"></textarea>
-                                <label for="textarea1">Add a comment</label>
-                            </div>
+                <form id="star{{ report.id }}" method="POST" action="{% url 'posts:report_star' report.id %}">
+                    {% csrf_token %}
+                    <input type="hidden">
+                </form>
+            </div>
+            <div class="row">
+                <form class="col s12" action="{{ report.get_absolute_url }}" method="post" name="comment">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea name="comment" id="textarea1" class="materialize-textarea"></textarea>
+                            <label for="textarea1">Add a comment</label>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Post
-                                </button>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Post
+                            </button>
                         </div>
-                    </form>
-                </div>
-                {% for comment in comments %}
-                    <div class="card-panel hoverable grey lighten-3"
-                         style="border-left: 5px solid #b0bec5; margin:8px;">
+                    </div>
+                </form>
+            </div>
+            {% for comment in comments %}
+                <div class="card-panel hoverable grey lighten-3"
+                     style="border-left: 5px solid #b0bec5; margin:8px;">
                 <span class="title">
                         <p class="info">Posted {{ comment.pub_date|naturaltime }}
                             by <a href="/accounts/{{ comment.author.id }}">{{ comment.author }}</a></p></span>
-                        <p class="flow-text">{{ comment.body|markdownify|safe }}</p>
-                    </div>
-                {% empty %}
-                    <p>There are no comments yet.</p>
-                {% endfor %}
+                    <p class="flow-text">{{ comment.body|markdownify|safe }}</p>
+                </div>
+            {% empty %}
+                <p>There are no comments yet.</p>
+            {% endfor %}
 
-                {% if new_comment %}
-                    <h2>Your comment has been added.</h2>
-                {% else %}
+            {% if new_comment %}
+                <h2>Your comment has been added.</h2>
+            {% else %}
 
-                {% endif %}
-            </div>
+            {% endif %}
         </div>
+    </div>
     </div>
 {% endblock %}

@@ -8,6 +8,9 @@
                 <h4>CREATE A POST</h4>
             </div>
         </div>
+         {% if error %}
+            <div class="col s12 red lighten-2 error">{{ error }}</div>
+        {% endif %}
         <form class="col s8" method="POST" action="{% url 'posts:create_report' %}" autocomplete="off">
             {% csrf_token %}
 

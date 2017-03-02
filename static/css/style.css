@@ -1,14 +1,35 @@
+/* Navigation Custom Styles */
+nav .brand-logo {
+    padding-left: 35px;
+}
+
+.nav-wrapper {
+    background-color: #448aff;
+    padding: 3px;
+}
+
+/* Form Custom Styles */
+.btn, .btn-large {
+    background-color: #2196f3;
+
+}
+
+.btn:hover, .btn-large:hover {
+     background-color:#64b5f6;
+
+}
+
 .title-link {
     font-size: 1.8em;
 }
-
+.sub-link {
+    float: right;
+}
 .card-title {
     padding: 50px;
     margin: 25px;
 }
-.nav-wrapper {
-    padding: 3px;
-}
+
 .inline {
   display: inline;
 }
@@ -31,4 +52,95 @@
 
 .post-body {
     padding: 15px;
+}
+
+.sub-heading {
+    color:#757575;"
+}
+
+.choose-div {
+    padding-top:100px;
+}
+
+/* like and message custom styles */
+.liked {
+    color:#2196f3;
+    width: 15px;
+    height: 50px;
+    position: relative;
+    top: 5px;
+    margin-right: 12px;
+    font-size: 2em;
+
+}
+
+.liked_number {
+    top: -2px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.message_number {
+    top: -2px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color:#757575;
+}
+.unliked {
+    color:#757575;
+    width: 15px;
+    height: 50px;
+    position: relative;
+    top: 5px;
+    margin-right: 12px;
+}
+
+.unliked:hover {
+    color:#2196f3;
+}
+
+/* styles for comment icon by like button */
+.comment {
+    color:#757575;
+    width: 15px;
+    height: 50px;
+    position: relative;
+    top: 5px;
+    margin-right: 12px;
+    margin-left: 15px;
+    font-size: 1em;
+}
+
+/* styles for custom error divs */
+.error {
+    padding:15px;
+}
+
+/* styles for follow and create report button */
+
+.follow {
+    color: #1976d2;
+    font-size: 16px;
+    border-width: 0;
+}
+
+.follow:hover {
+    color: #2196F3;
+}
+
+.follow:active {
+    color: #2196F3;
+}
+
+.follow:focus {
+    color: #2196F3;
+}
+
+.create-report {
+    color: #64b5f6;
+    font-size: 16px;
+}
+
+.create-report:hover {
+    color: #bbdefb;
 }

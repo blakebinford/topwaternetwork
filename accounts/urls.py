@@ -4,7 +4,9 @@ from . import views
 app_name = 'accounts'
 
 urlpatterns = [
+    url(r'^choose/', views.account_choose, name='choose'),
     url(r'^signup/', views.signup, name='signup'),
+    url(r'^guidesignup/', views.guide_signup, name='guide_signup'),
     url(r'^login/', views.loginview, name='login'),
     url(r'^logout/', views.logout_view, name='logout'),
     url(r'^(?P<user>[0-9]+)/', views.user_detail, name='report_detail'),

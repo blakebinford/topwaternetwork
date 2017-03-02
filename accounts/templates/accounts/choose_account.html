@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container choose-div">
+            <div class="col s12 center-align">
+                <h2>Are you a</h2>
+            </div>
+            <div class="col s12 center-align">
+                <h3><a href="{% url 'accounts:guide_signup' %}">Fishing Guide</a> or a <a href="{% url 'accounts:signup' %}">Weekend Warrior</a></h3>
+            </div>
+    </div>
+{% endblock %}

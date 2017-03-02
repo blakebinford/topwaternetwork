@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'subnetwork',
     'posts',
     'markdownify',
+    'vote',
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,6 +128,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'binford.blake'
+EMAIL_HOST_PASSWORD = '758595Aa'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 MARKDOWNIFY_WHITELIST_TAGS = [

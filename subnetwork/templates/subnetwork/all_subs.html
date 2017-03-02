@@ -23,35 +23,41 @@
                         </form>
                     </div>
                 </div>
-                <ul>
-                    <li>
-                        {% for sub in subs %}
-                            <a href="{% url 'subnetworks:sub_name' sub.sub_name %}">
-                                <div class="card-panel hoverable grey lighten-3">
-                <span class="title title-link">
+                {% for sub in subs %}
+
+                    <div class="card-panel hoverable grey lighten-3">
+                        <div class="row">
+                            <div class="col s12 m6">
+                                <a href="{% url 'subnetworks:sub_name' sub.sub_name %}"> <span class="title title-link">
                      {{ sub.sub_name }}
-                </span>
-                                    <form method="post" action="{% url 'subnetworks:follow' sub.id %}" class="inline">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                                        <button type="submit" name="submit_param" value="submit_value"
-                                                class="link-button">
-                                            Follow
-                                        </button>
-                                    </form>
-                                    <span style="float:right">
+                </span></a>
+                            </div>
+                            <div class="col s12 m6">
+                        <span style="float:right">
                         <div class="chip">
                             {{ sub.number_of_followers }} followers
                         </div>
                         <div class="chip">
                             {{ sub.number_of_posts }} posts
                         </div>
+
+
+                            <form method="post" action="{% url 'subnetworks:follow' sub.id %}" class="inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                                <button type="submit" name="submit_param" value="submit_value" class="chip follow">
+                                    follow
+                                </button>
+                            </form>
+
+                            <a href="{% url 'posts:create_report' %}" class="chip create-report">post</a>
                         </span>
-                                </div>
-                            </a>
-                        {% endfor %}
-                    </li>
-                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
                 <div class="pagination">
                     <span class="step-links">
                          {% if subs.has_previous %}

@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from posts.views import home_page
+from posts.views import home_page, front_page
 
 
 urlpatterns = [
+    url(r'^$', front_page, name="front_page"),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^reports/', include('posts.urls')),
     url(r'^sub/', include('subnetwork.urls'),),
     url(r'^^(?P<pk>[0-9]+)/$$', home_page, name='user_front'),
-    url(r'^messages/', include('django_messages.urls')),
 ]

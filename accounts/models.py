@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+
 # Create your models here.
 
 
@@ -20,4 +20,3 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return '{}'.format(self.user_relation)
-

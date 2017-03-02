@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load markdownify %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
+            <div class="col s12 m12">
+
+            <h3 class="center-align">{{ user_page.userprofile.service_name }}</h3>
+            <div class="row">
+                <div class="col s4">
+                    <h4>{{ user_page }}</h4>
+                    <p>Joined on {{ user_page.date_joined|date:"M d, Y" }}</p>
+                    <h5>About Us</h5>
+                    <p>{{ user_page.userprofile.user_bio }}</p>
+                    <p>We serve {{ user_page.userprofile.fish_location }}</p>
+                    <h5>Contact Us</h5>
+                    <p>Email: {{ user_page.email }}</p>
+                    <p>Phone: {{ user_page.userprofile.phone }}</p>
+                </div>
+            <div class="col s8">
+            <h4 class="center-align">Recent Posts</h4>
+                {% for post in user_posts.all %}
+                     <div class="card-panel grey lighten-3">
+                <span class="title">
+                    <a href="{{ post.get_absolute_url }}" class="title-link">{{ post.title|title|truncatechars:60 }}</a><a href="{% url 'subnetworks:sub_name' post.sub_network %}" class="sub-link">sub/{{ post.sub_network }}</a>
+                    <br/>
+                    <span class="sub-heading">submitted {{ post.pub_date|naturaltime }} by <a
+                            href="/accounts/{{ post.author.id }}">{{ post.author }}</a></span>
+                </span>
+                            <p>{{ post.body|truncatechars:60|markdownify|safe }}</p>
+
+                        </div>
+
+
+                {% endfor %}
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

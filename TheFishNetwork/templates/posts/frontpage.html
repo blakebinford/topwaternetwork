@@ -6,9 +6,10 @@
         <div class="row">
 
             <div class="col s12 m12">
-                <h3 class="center-align">{{ subnetwork.sub_name }}</h3>
+                <h3 class="center-align">Front Page</h3>
+                <ul>
 
-            {% for sub in reports %}
+                    {% for sub in paginate %}
                         <div class="card-panel grey lighten-3">
                             <div class="row">
                                 <a
@@ -39,43 +40,27 @@
 
                     {% endfor %}
 
-
+                </ul>
                 <div class="pagination">
                     <span class="step-links">
-                         {% if reports.has_previous %}
-                             <a href="?page={{ reports.previous_page_number }}">previous</a>
+                         {% if paginate.has_previous %}
+                             <a href="?page={{ paginate.previous_page_number }}">previous</a>
                          {% endif %}
 
                         <span class="current">
-                               Page {{ reports.number }} of {{ reports.paginator.num_pages }}.
+                               Page {{ paginate.number }} of {{ paginate.paginator.num_pages }}.
                             </span>
 
-                        {% if reports.has_next %}
-                            <a href="?page={{ reports.next_page_number }}">next</a>
+                        {% if paginate.has_next %}
+                            <a href="?page={{ paginate.next_page_number }}">next</a>
                         {% endif %}
-    </span>
+                    </span>
                 </div>
+
 
             </div>
         </div>
-
-        <div class="fixed-action-btn">
-            <a class="btn-floating btn-large red">
-                <i class="large material-icons">menu</i>
-            </a>
-            <ul>
-                <li><a href="{% url 'posts:create_report' %}" class="btn-floating create-report"><i
-                        class="material-icons">format_quote</i></a></li>
-                <li><form method="post" action="{% url 'subnetworks:follow' subnetwork.id %}" class="inline">
-                        {% csrf_token %}
-                        <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                        <button type="submit" name="submit_param" value="submit_value"
-                                class="link-button">
-                            <a class="btn-floating waves-effect waves-light follow"><i class="material-icons">add</i></a>
-                        </button>
-                    </form></li>
-            </ul>
-        </div>
-
     </div>
+
+
 {% endblock %}

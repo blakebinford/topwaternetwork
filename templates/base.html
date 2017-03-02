@@ -14,15 +14,15 @@
 </head>
 <body>
 <ul id="dropdown1" class="dropdown-content">
-    <li><a href="/{{ user.id }}">My Homepage</a></li>
+    <li><a href="/accounts/{{ user.id }}">My Homepage</a></li>
     <li><a href="/accounts/{{ user.id }}">My Dashboard</a></li>
     <li><a href="/accounts/sub/{{ user.id }}">My Networks</a></li>
     <li><a href="{% url 'posts:create_report' %}">Create Post</a></li>
     <li><a href="{% url 'accounts:logout' %}">Log Out</a></li>
 </ul>
 <nav>
-    <div class="nav-wrapper blue-grey darken-3">
-        <a href="#!" class="brand-logo">The Fish Network</a>
+    <div class="nav-wrapper">
+        <a href="{% url 'front_page' %}" class="brand-logo">The Fish Network</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             {% if request.user.is_authenticated %}
@@ -30,7 +30,7 @@
                 <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Account<i
                         class="material-icons right">arrow_drop_down</i></a></li>
             {% else %}
-                <li><a href="{% url 'accounts:signup' %}">sign up</a></li>
+                <li><a href="{% url 'accounts:choose' %}">sign up</a></li>
                 <li><a href="{% url 'accounts:login' %}">sign in</a></li>
             {% endif %}
         </ul>
