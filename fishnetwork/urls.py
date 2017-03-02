@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from posts.views import home_page, front_page
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^$', front_page, name="front_page"),
@@ -26,3 +27,6 @@ urlpatterns = [
     url(r'^sub/', include('subnetwork.urls'),),
     url(r'^^(?P<pk>[0-9]+)/$$', home_page, name='user_front'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

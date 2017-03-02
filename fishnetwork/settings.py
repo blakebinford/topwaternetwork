@@ -130,6 +130,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = (os.path.join(BASE_DIR, "media"),)
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = local_settings.email_user()

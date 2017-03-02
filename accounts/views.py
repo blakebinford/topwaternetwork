@@ -5,7 +5,6 @@ from .models import UserProfile
 from posts.models import FishingReport
 from subnetwork.models import SubNetwork
 from django.core.mail import send_mail
-
 # Create your views here.
 
 
@@ -21,14 +20,14 @@ def signup(request):
                 user = User.objects.create_user(username=request.POST['username'],
                                                 password=request.POST['password'],
                                                 email=request.POST['email'],
+                                                first_name=request.POST['firstname'],
+                                                last_name=request.POST['lastname'],
                                                 )
                 profile = UserProfile()
                 profile.user_relation = user
-                # profile.fish_location = request.POST['fish_location']
-                # profile.user_bio = request.POST['user_bio']
-                # profile.phone_number = request.POST['phone_number']
                 profile.save()
-                email_body = "Thank you for signing up with Top Water Network, {}. Connect with fishing guides and find fishing reports of your favorite fishing spots.".format(user.username)
+                email_body = "Thank you for signing up with Top Water Network, {}. Connect with fishing " \
+                             "guides and find fishing reports of your favorite fishing spots.".format(user.username)
                 send_mail('Thank you for signing up with Top Water Network!', email_body, 'noreply@topwaternetwork.com',
                           [user.email], fail_silently=False)
 
@@ -54,6 +53,8 @@ def guide_signup(request):
                 user = User.objects.create_user(username=request.POST['username'],
                                                 password=request.POST['password'],
                                                 email=request.POST['email'],
+                                                first_name=request.POST['firstname'],
+                                                last_name=request.POST['lastname'],
                                                 )
                 profile = UserProfile()
                 profile.user_relation = user
