@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from . import local_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')9z64ck4gn8dt2_f#7w0j8b_26vy(0(g=frc2j^y0v&39(zg$='
+SECRET_KEY = local_settings.secret()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -131,8 +132,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'binford.blake'
-EMAIL_HOST_PASSWORD = '758595Aa'
+EMAIL_HOST_USER = local_settings.email_user()
+EMAIL_HOST_PASSWORD = local_settings.email_password()
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
