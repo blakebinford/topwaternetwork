@@ -1,11 +1,13 @@
+{% load static %}
 <html>
 <head>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Compiled and minified JavaScript -->
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -36,7 +38,11 @@
         </ul>
         <ul class="side-nav" id="mobile-demo">
             {% if request.user.is_authenticated %}
-                <li><a href="{% url 'subnetworks:all_subs' %}">networks</a></li>
+                <li><a href="{% url 'subnetworks:all_subs' %}">Networks</a></li>
+                <li><a href="/accounts/{{ user.id }}">My Homepage</a></li>
+                <li><a href="/accounts/{{ user.id }}">My Dashboard</a></li>
+                <li><a href="/accounts/sub/{{ user.id }}">My Networks</a></li>
+                <li><a href="{% url 'posts:create_report' %}">Create Post</a></li>
                 <li><a href="{% url 'accounts:logout' %}">log out</a></li>
             {% else %}
                 <li><a href="{% url 'accounts:signup' %}">sign up</a></li>

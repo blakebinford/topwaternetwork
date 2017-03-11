@@ -27,6 +27,3 @@ urlpatterns = [
     url(r'^sub/', include('subnetwork.urls'),),
     url(r'^^(?P<pk>[0-9]+)/$$', home_page, name='user_front'),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
